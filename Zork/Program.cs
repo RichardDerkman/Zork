@@ -69,6 +69,7 @@ namespace Zork
     };
         private static bool Move(Commands command)
         {
+            Assert.IsTrue(IsDirection(command), "Invalid direction.");
             bool isValidMove = true;
             switch (command)
             {
