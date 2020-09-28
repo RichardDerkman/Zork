@@ -78,21 +78,22 @@ namespace Zork
             bool isValidMove = true;
             switch (command)
             {
-                case Commands.NORTH when Rooms.GetLength(0) < Rooms.Length - 1:
+                case Commands.NORTH when Location.Row < Rooms.GetLength(0) - 1:
                     Location.Row++;
                     break;
-                case Commands.SOUTH when Rooms.GetLength(0) > 0:
+                case Commands.SOUTH when Location.Row > 0:
                     Location.Row--;
                     break;
-                case Commands.EAST when Rooms.GetLength(1) < Rooms.Length - 1:
+                case Commands.EAST when Location.Column < Rooms.GetLength(1) - 1:
                     Location.Column++;
-                         break;
-                case Commands.WEST when Rooms.GetLength(1) > 0:
-                        Location.Column--;
+                    break;
+                case Commands.WEST when Location.Column > 0:
+                    Location.Column--;
                     break;
                 default:
                     isValidMove = false;
                     break;
+
 
             }
             return isValidMove;
