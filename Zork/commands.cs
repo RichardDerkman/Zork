@@ -4,8 +4,7 @@ using System.Text;
 
 namespace Zork
 {
-    class commands
-    {
+  
         enum Commands
         {
             QUIT,
@@ -16,5 +15,5 @@ namespace Zork
             WEST,
             UNKNOWN
         }
-    }
+    
 }
