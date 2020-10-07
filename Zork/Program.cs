@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace Zork
 {
@@ -30,7 +31,7 @@ namespace Zork
         }
         static void Main(string[] args)
         {
-            const string defaultroomFilename = "Rooms.txt";
+            const string defaultroomFilename = "Rooms.json";
             string roomFilename = (args.Length > 0 ? args[(int)CommandLineArguments.RoomsFilename] : defaultroomFilename);
 
             InitializeRoomDescriptions(roomFilename);
@@ -74,7 +75,7 @@ namespace Zork
             Enum.TryParse<Commands>(commandString, true, out Commands result) ? result : Commands.UNKNOWN;
         private static bool IsDirection(Commands command) => Directions.Contains(command);
 
-        private static readonly Room[,] Rooms =
+        private static Room[,] Rooms =
         {
             {new Room("Rocky Trail"),new Room("South of House") ,new Room("Canyon View") },
             { new Room("Forest"),new Room("West of House"), new Room("Behind House")},
@@ -82,20 +83,10 @@ namespace Zork
         };
         private static void InitializeRoomDescriptions(string roomsFilename)
         {
-            const string fiedDelimiter = "##";
-            const int expectedFieldCount = 2;
-            string[] lines = File.ReadAllLines(roomsFilename);
-            foreach(string line in lines)
+            var rooms = JsonConvert.DeserializeObject<Room[,]>(File.ReadAllText(roomsFilename));
+            foreach(Room room in rooms)
             {
-                string[] fields = line.Split(fiedDelimiter);
-                if(fields.Length != expectedFieldCount)
-                {
-                    throw new InvalidDataException("Invalid record.");
-                }
-                string name = fields[(int)Fields.Name];
-                string description = fields[(int)Fields.Description];
-
-                RoomMap[name].Description = description;
+                RoomMap[room.Name].Description = room.Description;
             }
         }
         private static bool Move(Commands command)
