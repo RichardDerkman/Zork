@@ -1,23 +1,32 @@
 ﻿using System;
-using Zork.Common;
+using System.Collections.Generic;
+using System.Data.Common;
+using System.Linq;
+using System.IO;
+using Newtonsoft.Json;
+using System.IO.Enumeration;
 
 namespace Zork
 {
-    class Program
+
+   public class Program
     {
-        static void Main(string[] args)
-        {
-            const string defaultGameFilename = "Zork.json";
-            string gameFilename = (args.Length > 0 ? args[(int)CommandLineArguments.GameFilename] : defaultGameFilename);
-
-            Game game = Game.Load(gameFilename);            
-            game.Run();
-        }
-
         private enum CommandLineArguments
         {
-            GameFilename = 0
+            RoomsFilename = 0
         }
+
+        static void Main(string[] args)
+        {
+            const string defaultroomFilename = "Rooms.json";
+            string roomFilename = (args.Length > 0 ? args[(int)CommandLineArguments.RoomsFilename] : defaultroomFilename);
+
+            Game game = Game.Load(roomFilename);
+            Console.WriteLine("Welcome to Zork!");
+            game.Run();
+            Console.WriteLine("Thank you for playing!");
+
+        }
+
     }
 }
-
