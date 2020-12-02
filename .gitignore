@@ -1,6 +1,6 @@
 .vs
 .gitignore
-README
+#zork.md
 */obj
 */bin
 Zork.Unity/Library
