@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Zork;
@@ -16,5 +14,6 @@ public class UnityInputService : MonoBehaviour, IInputService
         Assert.IsNotNull(InputField);
         Assert.IsFalse(string.IsNullOrEmpty(InputField.text));
         InputRecieved?.Invoke(this, InputField.text);
+        InputField.text = string.Empty;
     }
 }

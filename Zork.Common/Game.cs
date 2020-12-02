@@ -65,7 +65,7 @@ namespace Zork
             Output.WriteLine(string.IsNullOrWhiteSpace(WelcomeMessage) ? "Welcome to Zork!" : WelcomeMessage);
             IsRunning = true;
 
-            Output.WriteLine(Player.Location);
+            Commands["LOOK"].Action(this);
         }
 
         private void Input_InputRecieved(object sender, string inputString)

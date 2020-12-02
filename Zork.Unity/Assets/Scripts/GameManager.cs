@@ -46,9 +46,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Return) && string.IsNullOrWhiteSpace(InputService.InputField.text) == false)
+        if (Input.GetKeyDown(KeyCode.Return) && string.IsNullOrWhiteSpace(InputService.InputField.text) == false)
         {
+            OutputService.WriteLine($"> {InputService.InputField.text}");
             InputService.ProcessInput();
+            OutputService.WriteLine(string.Empty);
             InputService.InputField.Select();
             InputService.InputField.ActivateInputField();
         }
