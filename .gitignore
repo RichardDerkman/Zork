@@ -1,4 +1,6 @@
 .vs
+.gitignore
+README
 */obj
 */bin
 Zork.Unity/Library
